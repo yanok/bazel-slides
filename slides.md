@@ -174,6 +174,8 @@ Though very useful, macros sometimes complicate the error messages
 - Conventionally, macros should take the `name` argument and create the "main" target using this name, and any other targets using `name` as a prefix.
 
 - So if you end up in this situation, try looking for something with a matching prefix.
+
+---
 ---
 # The Magic: Sandboxing
 
@@ -193,7 +195,6 @@ Sandboxing is the secret sauce. It's a strict but fair system. With `make`, a co
 -->
 
 ---
-layout: 'center'
 ---
 
 # Dependency Graph
