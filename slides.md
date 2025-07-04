@@ -231,6 +231,38 @@ And the caching is what makes it so fast. When you change one file, only the act
 -->
 
 ---
+---
+
+# Bazel Cheatsheet: Running bazel
+
+Some basic bazel commands
+
+* to build the target:
+  ```
+  bazel build //path:target_name
+  ```
+* to run the test:
+  ```
+  bazel test //path:target_name
+  ```
+
+---
+---
+
+# Bazel Cheatsheet: in the BUILD files
+
+* use `load` to import stuff, like
+  ```python
+  load("@rules_cc//cc:cc_library.bzl", "cc_library")
+  ```
+* for most languages there is a corresponding bazel package providing `_library`/`_binary`/`_test` rules, for example:
+  - `go_library`/`go_binary`/`go_test` for Go
+  - `py_library`/`py_binary`/`py_test` for Python
+  - and so on
+
+* normally one needs to give them at least `name`, `srcs` and optionally `deps` and `data` (non-source inputs). Language-specific rules may allow/require more arguments. 
+
+---
 layout: 'center'
 class: 'text-center'
 ---
