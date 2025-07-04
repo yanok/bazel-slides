@@ -222,8 +222,8 @@ This is the payoff for all our hard work declaring dependencies. Bazel gets a co
 
 # The Magic: Caching
 
-**Actions are cached aggressively**:
-- Bazel computes a hash of all inputs to an action (source files, compiler flags, dependency outputs).
+Actions are cached aggressively:
+- Bazel computes a hash of all inputs to an action (source files, compiler flags, required dependency outputs and a bit more).
 - If the hash matches a previous run, the outputs are pulled instantly from the cache.
 
 <!--
