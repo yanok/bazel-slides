@@ -56,7 +56,7 @@ Every target has a unique identifier called a **label**.
 - `//`: The root of your workspace.
 - `path/to/package`: The directory containing the `BUILD` file.
 - `:`: Separates the package path from the target name.
-- `target_name`: The name of the target defined in the `BUILD` file.
+- `target_name`: The name of the target defined in the `BUILD` file or an output.
 
 Example: `//src/server:server_binary`
 
