@@ -117,6 +117,64 @@ The `cc_binary` rule compiles `main.cpp` and links it against the `greeter` libr
 
 ---
 
+# Additional terminology: Macros
+
+When you need to call a few rules at once
+
+Example: A macro that declares a C++ library and a test for every corresponding `_test.cc` file.
+
+```python
+def cc_lib_and_test(name, srcs, hdrs, deps):
+  cc_library(
+    name = name,
+    srcs = srcs,
+    hdrs = hdrs,
+    deps = deps,
+  )
+  for s in srcs:
+    basename = s[:-2]
+    cc_test(
+      name = name + "_" + basename + "_test",
+      srcs = [basename + "_test.cc"],
+      deps = ":" + name,
+    )
+```
+
+**NOTE**: it's not a very useful example, since we can't check if resp `_test.cc` files actually exist. Macros have their inputs as strings only, there is no way to look into the source dir.
+
+
+---
+
+# Macros: Usage
+
+At the call site macros look exactly as rules
+
+So people who don't write their own macros or rules don't even need to know the difference.
+
+```python
+cc_lib_and_test(
+  name = "my_lib",
+  srcs = ["a.cc", "b.cc"],
+  hdrs = ["mylib.h"],
+)
+```
+
+Will create `my_lib` C++ library and two tests `my_lib_a_test` and `my_lib_b_test`.
+
+---
+
+# Macros: Errors
+
+Though very useful, macros sometimes complicate the error messages
+
+- For example, you can get an error: `failed to build //path:my_lib_b_test`
+
+- Normally you'd go into `//path/BUILD` and check how `my_lib_b_test` is defined... but it's not there...
+
+- Conventionally, macros should take the `name` argument and create the "main" target using this name, and any other targets using `name` as a prefix.
+
+- So if you end up in this situation, try looking for something with a matching prefix.
+---
 # The Magic: Sandboxing
 
 This is where Bazel differs most from `make`.
