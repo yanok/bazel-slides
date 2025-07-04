@@ -75,7 +75,7 @@ The job of a rule is to:
 2.  **Define Actions**: What commands should be run to connect inputs to outputs? (e.g., `g++ -c ...`)
 3.  **Declare Dependencies**: What other targets are needed as inputs? This builds the dependency graph.
 
-Most rules today are written in **Starlark**, a dialect of Python. This includes the standard C++ rules!
+Most rules today are written in **Starlark**, a dialect of Python.
 
 <!--
 Rules are the core of Bazel's logic. They are functions that produce actions. When you call a rule, you're not running a command directly. You're telling Bazel, "When you need to build this target, here are the instructions." This deferred execution is key to how Bazel can plan the entire build. The fact that even C++ rules are in Starlark is a testament to Bazel's extensibility.
