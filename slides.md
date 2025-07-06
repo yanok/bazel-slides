@@ -196,21 +196,22 @@ Sandboxing is the secret sauce. It's a strict but fair system. With `make`, a co
 -->
 
 ---
----
 
 # Dependency Graph
 
 Bazel uses the dependency information to build a DAG connecting all outputs to input files using actions.
 
-```mermaid {scale: 0.7}
-graph TD
-    A(["greeter"]) --> B(("Link"));
+```mermaid {scale: 0.9}
+graph LR
+    A(["hello_world"]) --> B(("Link"));
     B --> C(["main.o"]);
     B --> D(["libgreeter.so"]);
     C --> E(("Compile"));
     E --> F["main.cpp"];
     E --> G["greeter.h"];
-    D --> H(("Compile"));
+    D --> X((Link));
+    X --> Y(["greeter.o"])
+    Y --> H(("Compile"));
     H --> I["greeter.cpp"];
     H --> G;
 ```
