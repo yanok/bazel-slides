@@ -44,7 +44,7 @@ A fun fact: The name Bazel is an anagram of "Blaze", which was its internal name
 
 Everything in Bazel is organized around **targets**. A target is an object that Bazel can build.
 
-- A **file** (e.g., `main.cpp`)
+- A **file** (e.g., `main.cc`)
 - A **rule** (e.g., `cc_binary`, which creates an executable from source files)
 
 Every target has a unique identifier called a **label**.
@@ -92,7 +92,7 @@ Here's how you'd use the `cc_binary` and `cc_library` rules.
 ```python
 cc_library(
     name = "greeter",
-    srcs = ["greeter.cpp"],
+    srcs = ["greeter.cc"],
     hdrs = ["greeter.h"],
 )
 ```
@@ -101,7 +101,7 @@ cc_library(
 ```python
 cc_binary(
     name = "hello_world",
-    srcs = ["main.cpp"],
+    srcs = ["main.cc"],
     deps = [
         "//src/greeter:greeter",
     ],
@@ -112,8 +112,8 @@ Here, the `hello_world` target *depends* on the `greeter` target. Bazel knows it
 
 <!--
 This should look familiar. It's just a structured way of declaring what we would have written in a Makefile.
-The `cc_library` rule compiles `greeter.cpp` and makes `greeter.h` available to other targets.
-The `cc_binary` rule compiles `main.cpp` and links it against the `greeter` library. The `deps` attribute is how we build the dependency graph. We are explicitly stating the connection between these two components.
+The `cc_library` rule compiles `greeter.cc` and makes `greeter.h` available to other targets.
+The `cc_binary` rule compiles `main.cc` and links it against the `greeter` library. The `deps` attribute is how we build the dependency graph. We are explicitly stating the connection between these two components.
 -->
 
 ---
@@ -207,12 +207,12 @@ graph LR
     B --> C(["main.o"]);
     B --> D(["libgreeter.so"]);
     C --> E(("Compile"));
-    E --> F["main.cpp"];
+    E --> F["main.cc"];
     E --> G["greeter.h"];
     D --> X((Link));
     X --> Y(["greeter.o"])
     Y --> H(("Compile"));
-    H --> I["greeter.cpp"];
+    H --> I["greeter.cc"];
     H --> G;
 ```
 
