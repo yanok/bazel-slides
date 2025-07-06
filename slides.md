@@ -133,7 +133,7 @@ def cc_lib_and_test(name, srcs, hdrs, deps):
     deps = deps,
   )
   for s in srcs:
-    basename = s[:-2]
+    basename = s[:-3]  # drop .cc
     cc_test(
       name = name + "_" + basename + "_test",
       srcs = [basename + "_test.cc"],
