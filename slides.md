@@ -143,6 +143,9 @@ def cc_lib_and_test(name, srcs, hdrs, deps):
 
 **NOTE**: it's not a very useful example, since we can't check if resp `_test.cc` files actually exist. Macros have their inputs as strings only, there is no way to look into the source dir.
 
+<!--
+Macros are a powerful feature for reducing boilerplate in your BUILD files. If you find yourself repeating the same set of rule declarations over and over, it's probably time to write a macro. They are written in Starlark, just like rules, but they are simpler because they can only compose existing rules.
+-->
 
 ---
 
@@ -162,6 +165,10 @@ cc_lib_and_test(
 
 Will create `my_lib` C++ library and two tests `my_lib_a_test` and `my_lib_b_test`.
 
+<!--
+From the user's perspective, calling a macro is identical to calling a rule. This is a great abstraction. You don't need to know if you're calling a single rule or a macro that expands to a dozen rules. You just declare what you want, and Bazel figures it out.
+-->
+
 ---
 
 # Macros: Errors
@@ -175,6 +182,10 @@ Though very useful, macros sometimes complicate the error messages
 - Conventionally, macros should take the `name` argument and create the "main" target using this name, and any other targets using `name` as a prefix.
 
 - So if you end up in this situation, try looking for something with a matching prefix.
+
+<!--
+This is one of the few downsides of macros. Because they are expanded by Bazel before the analysis phase, the error messages you see might refer to targets that you didn't explicitly define in your BUILD file. The convention of naming generated targets with a prefix of the macro's name is a huge help here. If you see a weird target name, look for a macro call that could have generated it.
+-->
 
 ---
 ---
@@ -248,6 +259,10 @@ Some basic bazel commands
   bazel test //path:target_name
   ```
 
+<!--
+Here are the two commands you'll use most often. `bazel build` will compile the target and its dependencies, placing the output in a `bazel-bin` directory. `bazel test` will build and run a test target. Bazel is smart about only re-running tests if their code or dependencies have changed.
+-->
+
 ---
 ---
 
@@ -263,6 +278,10 @@ Some basic bazel commands
   - and so on
 
 * normally one needs to give them at least `name`, `srcs` and optionally `deps` and `data` (non-source inputs). Language-specific rules may allow/require more arguments. 
+
+<!--
+This is a quick look at the syntax inside a BUILD file. The `load` statement is how you import the rules you need. Most of the time, you'll be using a standard set of rules for your language. The attributes like `name`, `srcs`, and `deps` are the most common, but there are many others for more advanced configuration.
+-->
 
 ---
 layout: 'center'
