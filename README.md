@@ -1,6 +1,8 @@
 # An Introduction to Bazel
 
-This document provides a summary of the concepts and benefits of the Bazel build system, based on the presentation "A very short intro to Bazel." It's aimed at software engineers, particularly those with experience using tools like `make`.
+Please find the presentation at https://yanok.github.io/bazel-slides
+
+This document provides a summary of the concepts and benefits of the Bazel build system, based on the presentation "A very short intro to Bazel."
 
 ## Core Philosophy: Design Principles
 
